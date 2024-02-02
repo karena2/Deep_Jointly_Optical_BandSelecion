@@ -1,0 +1,65 @@
+
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.8484458923339844
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.41402509808540344
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.8541715145111084
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.41395026445388794
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.8514840006828308
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.4573609530925751
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.9205421805381775
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.2333032339811325
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.9078055620193481
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.2590455412864685
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.9041832089424133
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.26236051321029663
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.926384687423706
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.2128414362668991
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0
+Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 100
+Number of seeds = 1
+Mean of the accuracy = 0.9287216663360596
+Standard deviation of the accuracy = 0.0
+Mean of the loss = 0.22025014460086823
+Standard deviation of the loss = 0.0
+Mean of the number of bands = 10.0
+Standard deviation of the number of bands = 0.0

@@ -1,0 +1,5 @@
+; Semilla = 58; Accuracy = 0.9322503209114075; Loss = 0.18851618468761444; Metodo = TRC-OC-FDPC
+; Semilla = 58; Accuracy = 0.9302196502685547; Loss = 0.18593843281269073; Metodo = NC-OC-MVPCA
+; Semilla = 58; Accuracy = 0.9292966723442078; Loss = 0.1861249953508377; Metodo = NC-OC-IE
+; Semilla = 58; Accuracy = 0.9164666533470154; Loss = 0.48559001088142395; Metodo = SC-RDFBSS-SIDAM-MIN
+; Semilla = 58; Accuracy = 0.941942036151886; Loss = 0.20445726811885834; Metodo = Proposed
