@@ -88,9 +88,10 @@ band_temps = [[8,28,43,50,67,107,118,128,141,173], #TRC-OC-FDPC
 [65,56,35,194,55,118,61,58,80,185],#RL
 [19,29,80,146,58,45,77,98,81,79],#SC-RDFBSS-SIDAM-MIN
 [15,25,51,72,98,106,123,137,157,167],#TSC
-[21,35,69,101,117,133,149,150,165,181]] #proposed
+[21,35,69,101,117,133,149,150,165,181], #proposed
+[np.arange(1,L+1)]] #Full
 
-metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','RL','SC-RDFBSS-SIDAM-MIN','TSC','Proposed']
+metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','RL','SC-RDFBSS-SIDAM-MIN','TSC','Proposed', 'Full']
 bandas = np.shape(band_temps[0])
 for method in range(len(band_temps)):
     for band in range(len(band_temps[0])):
@@ -101,7 +102,7 @@ for band_temp in band_temps:
     for ind_model in range(len(bandas)):
         name = 'Number_bands_' + str(bandas[ind_model])+"_Prueba_"+str(prueba)
         #model.summary()
-        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands/"
+        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands_test_2/"
         try:
             os.stat(cwd)
         except:
@@ -116,7 +117,7 @@ for band_temp in band_temps:
 
         for seed in semilla:
             set_seed(seed)
-            model = My_network200(input_size=(200, 1, 1), num_classes=np.max(np.unique(gt)))
+            model = My_network_test(input_size=(200, 1, 1), num_classes=np.max(np.unique(gt)))
             X_Train_temp = np.zeros(X_Train.shape)
             X_Train_temp[:,band_temp,:] =X_Train[:,band_temp,:]
             X_Test_temp = np.zeros(X_Test.shape)

@@ -9,6 +9,7 @@ from tensorflow import keras
 import os.path as path
 
 semilla = [58]
+#nvidia-smi
 
 set_seed(0) #fixed for dataset
 # @title RUN
@@ -16,15 +17,15 @@ set_seed(0) #fixed for dataset
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0" #(or "1" or "2")
 gpus = tf.config.list_physical_devices('GPU')
- 
-dataset = "IP"
+
+dataset = "PU"
 
 if gpus:
   # Restrict TensorFlow to only allocate 1GB of memory on the first GPU
   try:
     tf.config.set_logical_device_configuration(
         gpus[0],
-        [tf.config.LogicalDeviceConfiguration(memory_limit= 3*1024)])
+        [tf.config.LogicalDeviceConfiguration(memory_limit= 2*1024)])
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
@@ -78,30 +79,28 @@ Acc = []
 Loss = []
 Bands = []
 
-#conda activate tf
-#python Main_selected_IP.py
-#nvidia-smi
+band_temps = [[3,8,15,19,29,33,36,48,53,61], #TRC-OC-FDPC
+[4,10,17,20,26,36,39,49,58,63],#NC-OC-MVPCA
+[4,10,17,22,30,36,43,49,58,63],#NC-OC-IE
+[12,21,29,38,48,58,66,83,92,101],#TSC
+[14,24,28,41,54,67,72,87,92,97],#ASPS_MN
+[72,2,11,1,35,3,20,68,62,26],#SC-RDFBSS-SIDAM-MIN
+[27,35,51,79,83,85,87,91,93,95],#Proposed
+np.arange(1,L+1)] #Full
 
-band_temps = [[8,28,43,50,67,107,118,128,141,173], #TRC-OC-FDPC
-[17,29,42,48,57,89,117,161,166,176],#NC-OC-MVPCA
-[17,29,42,48,54,89,117,160,166,176],#NC-OC-IE
-[65,56,35,194,55,118,61,58,80,185],#RL
-[19,29,80,146,58,45,77,98,81,79],#SC-RDFBSS-SIDAM-MIN
-[15,25,51,72,98,106,123,137,157,167],#TSC
-[21,35,69,101,117,133,149,150,165,181]] #proposed
-
-metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','RL','SC-RDFBSS-SIDAM-MIN','TSC','Proposed']
+metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','TSC','ASPS_MN','SC-RDFBSS-SIDAM-MIN','Proposed','Full']
 bandas = np.shape(band_temps[0])
+
 for method in range(len(band_temps)):
     for band in range(len(band_temps[0])):
-        band_temps[method][band] = band_temps[method][band]-1 
+        band_temps[method][band] = band_temps[method][band]-1
 
 prueba = 0
 for band_temp in band_temps:
     for ind_model in range(len(bandas)):
         name = 'Number_bands_' + str(bandas[ind_model])+"_Prueba_"+str(prueba)
         #model.summary()
-        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands/"
+        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands_test_2/"
         try:
             os.stat(cwd)
         except:
@@ -116,7 +115,7 @@ for band_temp in band_temps:
 
         for seed in semilla:
             set_seed(seed)
-            model = My_network200(input_size=(200, 1, 1), num_classes=np.max(np.unique(gt)))
+            model = My_network_test(input_size=(L, 1, 1), num_classes=np.max(np.unique(gt)))
             X_Train_temp = np.zeros(X_Train.shape)
             X_Train_temp[:,band_temp,:] =X_Train[:,band_temp,:]
             X_Test_temp = np.zeros(X_Test.shape)
@@ -163,7 +162,6 @@ for band_temp in band_temps:
                 f.write('; Accuracy = ' + str(Results_Best[1]))  # Accuracy
                 f.write('; Loss = ' + str(Results_Best[0]))  # Loss
                 f.write('; Metodo = ' + (str(metodo[prueba]))+ '\n'),  # Metodo
-
 
         with open(cwd + '/Final_Selected_results.txt', 'a') as f:
             f.write('\nNumber of bands = ' + str(bandas[ind_model]) + ' PACIENCE = ' + str(patience) + ' BATCH SIZE = ' + str(batch_size) + ' N. EPOCHS = ' + str(

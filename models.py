@@ -51,6 +51,18 @@ def My_network200(pretrained_weights=None, input_size=(101, 1, 1), num_classes=3
         model.load_weights(pretrained_weights)
     return model
 
+def My_network_test(pretrained_weights=None, input_size=(101, 1, 1), num_classes=3):
+    inputs = Input(input_size)
+    flat = Flatten()(inputs)
+    Den1 = Dense(128, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4))(flat)
+    Den1 = Dense(64, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4))(Den1)
+    Den1 = Dense(32, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4))(Den1)
+    final = Dense(num_classes, activation='softmax')(Den1)
+    model = Model(inputs, final)
+    if (pretrained_weights):
+        model.load_weights(pretrained_weights)
+    return model
+
 def My_networkE2E(pretrained_weights=None, input_size=(101, 1, 1), num_classes=3, bands=25, alpha=3, parm1=1e-8, beta = 0):
     inputs = Input(input_size)
     y=My_Band_Selection_method_1(input_dim=(input_size[0], 1), init_value=1, parm1=parm1, bands=bands, alpha=alpha, beta=beta)(inputs)
