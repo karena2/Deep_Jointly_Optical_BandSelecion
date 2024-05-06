@@ -77,9 +77,6 @@ Seed = []
 Acc = []
 Loss = []
 Bands = []
-#python Main_selected_Sal.py
-
-#band_temp = [10,18,34,42,74,98,114,130,148,162]
 
 band_temps = [[7,11,20,24,32,38,41,46,55,68], #TRC-OC-FDPC
 [8,15,25,32,45,58,93,119,125,135],#NC-OC-MVPCA
