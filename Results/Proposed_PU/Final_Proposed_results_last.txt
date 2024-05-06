@@ -1,9 +1,0 @@
-
-Number of bands = 10 PACIENCE = 80 BATCH SIZE = 32 N. EPOCHS = 200
-Number of seeds = 1
-Mean of the accuracy = 0.9242813587188721
-Standard deviation of the accuracy = 0.0
-Mean of the loss = 0.36812424659729004
-Standard deviation of the loss = 0.0
-Mean of the number of bands = 10.0
-Standard deviation of the number of bands = 0.0
