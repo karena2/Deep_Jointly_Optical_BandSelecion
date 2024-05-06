@@ -24,7 +24,7 @@ if gpus:
   try:
     tf.config.set_logical_device_configuration(
         gpus[0],
-        [tf.config.LogicalDeviceConfiguration(memory_limit= 2*1024)])
+        [tf.config.LogicalDeviceConfiguration(memory_limit= 1*1024)])
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
@@ -158,7 +158,7 @@ for band_temp in band_temps:
                 f.write('; Semilla = ' + (str(seed)))  # Semilla
                 f.write('; Accuracy = ' + str(Results_Best[1]))  # Accuracy
                 f.write('; Loss = ' + str(Results_Best[0]))  # Loss
-                f.write('; Metodo = ' + (str(metodo[prueba]))+ '\n'),  # Metodo
+                f.write('; Method = ' + (str(metodo[prueba]))+ '\n'),  # Metodo
 
         with open(cwd + '/Final_Selected_results.txt', 'a') as f:
             f.write('\nNumber of bands = ' + str(bandas[ind_model]) + ' PACIENCE = ' + str(patience) + ' BATCH SIZE = ' + str(batch_size) + ' N. EPOCHS = ' + str(
@@ -166,7 +166,7 @@ for band_temp in band_temps:
             f.write('\nNumber of seeds = ' + (str(np.size(semilla)))),  # Semilla
             f.write('\nMean of the accuracy = ' + str(np.mean(Acc))),  # Accuracy
             f.write('\nStandard deviation of the accuracy = ' + str(np.std(Acc))),  # Accuracy
-            f.write('\nMetodo = ' + (str(metodo[prueba]))),  # Metodo
+            f.write('\nMethod = ' + (str(metodo[prueba]))),  # Metodo
             f.write('\nMean of the loss = ' + str(np.mean(Loss))),  # Loss
             f.write('\nStandard deviation of the loss = ' + str(np.std(Loss))),  # Accuracy
             f.write('\nMean of the number of bands = ' + str(np.mean(Bands))),  # Bandas

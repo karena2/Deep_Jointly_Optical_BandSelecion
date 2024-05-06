@@ -162,14 +162,14 @@ for band_temp in band_temps:
                 f.write('; Semilla = ' + (str(seed)))  # Semilla
                 f.write('; Accuracy = ' + str(Results_Best[1]))  # Accuracy
                 f.write('; Loss = ' + str(Results_Best[0]))  # Loss
-                f.write('; Metodo = ' + (str(metodo[prueba]))+ '\n'),  # Metodo
+                f.write('; Method = ' + (str(metodo[prueba]))+ '\n'),  # Metodo
 
         with open(cwd + '/Final_Selected_results.txt', 'a') as f:
             f.write('\nNumber of bands = ' + str(bandas[ind_model]) + ' PACIENCE = ' + str(patience) + ' BATCH SIZE = ' + str(batch_size) + ' N. EPOCHS = ' + str(
                 N_epochs))
             f.write('\nNumber of seeds = ' + (str(np.size(semilla)))),  # Semilla
             f.write('\nMean of the accuracy = ' + str(np.mean(Acc))),  # Accuracy
-            f.write('\nMetodo = ' + (str(metodo[prueba]))),  # Metodo
+            f.write('\nMethod = ' + (str(metodo[prueba]))),  # Metodo
             f.write('\nStandard deviation of the accuracy = ' + str(np.std(Acc))),  # Accuracy
             f.write('\nMean of the loss = ' + str(np.mean(Loss))),  # Loss
             f.write('\nStandard deviation of the loss = ' + str(np.std(Loss))),  # Accuracy
