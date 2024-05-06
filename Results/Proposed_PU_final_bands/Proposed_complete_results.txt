@@ -1,7 +1,0 @@
-; Semilla = 58; Accuracy = 0.8484458923339844; Loss = 0.41402509808540344; Metodo = TRC-OC-FDPC
-; Semilla = 58; Accuracy = 0.8541715145111084; Loss = 0.41395026445388794; Metodo = NC-OC-MVPCA
-; Semilla = 58; Accuracy = 0.8514840006828308; Loss = 0.4573609530925751; Metodo = NC-OC-IE
-; Semilla = 58; Accuracy = 0.9205421805381775; Loss = 0.2333032339811325; Metodo = TSC
-; Semilla = 58; Accuracy = 0.9078055620193481; Loss = 0.2590455412864685; Metodo = ASPS_MN
-; Semilla = 58; Accuracy = 0.9041832089424133; Loss = 0.26236051321029663; Metodo = SC-RDFBSS-SIDAM-MIN
-; Semilla = 58; Accuracy = 0.9287216663360596; Loss = 0.22025014460086823; Metodo = Proposed

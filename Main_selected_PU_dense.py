@@ -85,24 +85,23 @@ band_temps = [[3,8,15,19,29,33,36,48,53,61], #TRC-OC-FDPC
 [12,21,29,38,48,58,66,83,92,101],#TSC
 [14,24,28,41,54,67,72,87,92,97],#ASPS_MN
 [72,2,11,1,35,3,20,68,62,26],#SC-RDFBSS-SIDAM-MIN
-[27,35,51,79,83,85,87,91,93,95]]#Proposed seed 173
+[13,26,28,33,47,54,59,61,72,95],#MLBS
+[27,35,51,79,83,85,87,91,93,95],#Proposed
+np.arange(1,L+1)] #Full
 
-
-metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','TSC','ASPS_MN','SC-RDFBSS-SIDAM-MIN','Proposed']
+metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','TSC','ASPS_MN','SC-RDFBSS-SIDAM-MIN','MLBS','Proposed','Full']
 bandas = np.shape(band_temps[0])
-#python Main_selected_PU.py
 
 for method in range(len(band_temps)):
-    for band in range(len(band_temps[0])):
+    for band in range(len(band_temps[method])):
         band_temps[method][band] = band_temps[method][band]-1
 
-#python Main_selected_PU.py
 prueba = 0
 for band_temp in band_temps:
     for ind_model in range(len(bandas)):
         name = 'Number_bands_' + str(bandas[ind_model])+"_Prueba_"+str(prueba)
         #model.summary()
-        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands_2/"
+        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands_dense/"
         try:
             os.stat(cwd)
         except:
@@ -170,6 +169,7 @@ for band_temp in band_temps:
                 N_epochs))
             f.write('\nNumber of seeds = ' + (str(np.size(semilla)))),  # Semilla
             f.write('\nMean of the accuracy = ' + str(np.mean(Acc))),  # Accuracy
+            f.write('\nMetodo = ' + (str(metodo[prueba]))),  # Metodo
             f.write('\nStandard deviation of the accuracy = ' + str(np.std(Acc))),  # Accuracy
             f.write('\nMean of the loss = ' + str(np.mean(Loss))),  # Loss
             f.write('\nStandard deviation of the loss = ' + str(np.std(Loss))),  # Accuracy

@@ -8,7 +8,7 @@ import seaborn as sns
 from tensorflow import keras
 import os.path as path
 
-semilla = [58]
+semilla = [42,78,22,70,35,58,22,20,0,23]
 
 set_seed(0) #fixed for dataset
 # @title RUN
@@ -16,15 +16,15 @@ set_seed(0) #fixed for dataset
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0" #(or "1" or "2")
 gpus = tf.config.list_physical_devices('GPU')
- 
-dataset = "IP"
+
+dataset = "Sal"
 
 if gpus:
   # Restrict TensorFlow to only allocate 1GB of memory on the first GPU
   try:
     tf.config.set_logical_device_configuration(
         gpus[0],
-        [tf.config.LogicalDeviceConfiguration(memory_limit= 3*1024)])
+        [tf.config.LogicalDeviceConfiguration(memory_limit= 2*1024)])
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
@@ -54,7 +54,7 @@ gt = np.reshape(gt, [M*N])
 
 mean_all = np.mean(Spectral_data,0)
 std_all = np.std(Spectral_data,0)
-Spectral_data=(Spectral_data -mean_all)/std_all
+Spectral_data=(Spectral_data-mean_all)/std_all
 
 Portion = [0.7,0.1,0.2] # Training, Validation, Test #@param {type:"raw"}
 X_Train, Y_Train, X_Val, Y_Val, X_Test, Y_Test = split_data(Spectral_data,gt,Portion)
@@ -78,31 +78,26 @@ Acc = []
 Loss = []
 Bands = []
 
-#conda activate tf
-#python Main_selected_IP.py
-#nvidia-smi
 
-band_temps = [[8,28,43,50,67,107,118,128,141,173], #TRC-OC-FDPC
-[17,29,42,48,57,89,117,161,166,176],#NC-OC-MVPCA
-[17,29,42,48,54,89,117,160,166,176],#NC-OC-IE
-[65,56,35,194,55,118,61,58,80,185],#RL
-[19,29,80,146,58,45,77,98,81,79],#SC-RDFBSS-SIDAM-MIN
-[15,25,51,72,98,106,123,137,157,167],#TSC
-[21,35,69,101,117,133,149,150,165,181], #proposed
+band_temps = [[7,11,20,24,32,38,41,46,55,68], #TRC-OC-FDPC
+[8,15,25,32,45,58,93,119,125,135],#NC-OC-MVPCA
+[8,15,25,34,45,58,93,120,125,135],#NC-OC-IE
+[106,142,11,204,149,7,41,59,146,104],#SC-RDFBSS-SIDAM-MIN
+[9,25,37,41,57,67,75,81,97,137],#Proposed
 [np.arange(1,L+1)]] #Full
 
-metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','RL','SC-RDFBSS-SIDAM-MIN','TSC','Proposed', 'Full']
+metodo = ['TRC-OC-FDPC','NC-OC-MVPCA','NC-OC-IE','SC-RDFBSS-SIDAM-MIN','Proposed','Full']
+
 bandas = np.shape(band_temps[0])
 for method in range(len(band_temps)):
-    for band in range(len(band_temps[0])):
+    for band in range(len(band_temps[method])):
         band_temps[method][band] = band_temps[method][band]-1 
-
-prueba = 0
+prueba = 5
 for band_temp in band_temps:
     for ind_model in range(len(bandas)):
         name = 'Number_bands_' + str(bandas[ind_model])+"_Prueba_"+str(prueba)
         #model.summary()
-        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands_test_2/"
+        cwd = os.getcwd() + "/Results/Proposed_"+str(dataset)+"_final_bands_dense/"
         try:
             os.stat(cwd)
         except:
@@ -117,7 +112,7 @@ for band_temp in band_temps:
 
         for seed in semilla:
             set_seed(seed)
-            model = My_network_test(input_size=(200, 1, 1), num_classes=np.max(np.unique(gt)))
+            model = My_network_test(input_size=(L, 1, 1), num_classes=np.max(np.unique(gt)))
             X_Train_temp = np.zeros(X_Train.shape)
             X_Train_temp[:,band_temp,:] =X_Train[:,band_temp,:]
             X_Test_temp = np.zeros(X_Test.shape)
@@ -165,13 +160,13 @@ for band_temp in band_temps:
                 f.write('; Loss = ' + str(Results_Best[0]))  # Loss
                 f.write('; Metodo = ' + (str(metodo[prueba]))+ '\n'),  # Metodo
 
-
         with open(cwd + '/Final_Selected_results.txt', 'a') as f:
             f.write('\nNumber of bands = ' + str(bandas[ind_model]) + ' PACIENCE = ' + str(patience) + ' BATCH SIZE = ' + str(batch_size) + ' N. EPOCHS = ' + str(
                 N_epochs))
             f.write('\nNumber of seeds = ' + (str(np.size(semilla)))),  # Semilla
             f.write('\nMean of the accuracy = ' + str(np.mean(Acc))),  # Accuracy
             f.write('\nStandard deviation of the accuracy = ' + str(np.std(Acc))),  # Accuracy
+            f.write('\nMetodo = ' + (str(metodo[prueba]))),  # Metodo
             f.write('\nMean of the loss = ' + str(np.mean(Loss))),  # Loss
             f.write('\nStandard deviation of the loss = ' + str(np.std(Loss))),  # Accuracy
             f.write('\nMean of the number of bands = ' + str(np.mean(Bands))),  # Bandas

@@ -1,7 +1,0 @@
-Semilla = 58; Accuracy = 0.8445092439651489; Loss = 0.6060365438461304; Metodo = TRC-OC-FDPC;
-Semilla = 58; Accuracy = 0.8624878525733948; Loss = 0.554503858089447; Metodo = NC-OC-MVPCA; 
-Semilla = 58; Accuracy = 0.8435373902320862; Loss = 0.5309728384017944; Metodo = NC-OC-IE; 
-Semilla = 58; Accuracy = 0.7925170063972473; Loss = 0.8106338381767273; Metodo = RL; 
-Semilla = 58; Accuracy = 0.7798833847045898; Loss = 0.9406751394271851; Metodo = SC-RDFBSS-SIDAM-MIN;
-Semilla = 58; Accuracy = 0.8566569685935974; Loss = 0.6355031728744507; Metodo = TSC; 
-Semilla = 58; Accuracy = 0.8663751482963562; Loss = 0.5447380542755127; Metodo = Proposed
